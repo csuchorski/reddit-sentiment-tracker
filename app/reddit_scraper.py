@@ -25,15 +25,16 @@ class RedditScraper:
                 "id": post.id,
                 "title": post.title,
                 "body": post.selftext,
+                "subreddit": subreddit.display_name,
                 "created_at": post.created_utc
             })
 
         return posts
 
-    def fetch_comments_for_post(self, post):
+    def fetch_comments(self, post, limit=10):
         post.comments.replace_more(limit=0)
         comments = []
-        for comment in post.comments.list():
+        for comment in post.comments.list()[:limit]:
             comments.append({
                 "id": comment.id,
                 "body": comment.body,
@@ -42,3 +43,7 @@ class RedditScraper:
             })
 
         return comments
+
+    def fetch_comments_by_id(self, post_id, limit=10):
+        post = self.reddit.submission(id=post_id)
+        return self.fetch_comments(post, limit=limit)
