@@ -44,6 +44,6 @@ class RedditScraper:
 
         return comments
 
-    def fetch_comments_by_id(self, post_id, limit=10):
+    def fetch_comments_by_post_id(self, post_id, limit=10):
         post = self.reddit.submission(id=post_id)
         return self.fetch_comments(post, limit=limit)
