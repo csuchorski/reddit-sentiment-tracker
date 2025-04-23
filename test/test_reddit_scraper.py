@@ -64,19 +64,6 @@ def test_fetch_posts(mock_load_dotenv, mock_reddit):
         assert post["subreddit"] == "fake_subreddit_name"
         assert isinstance(post["created_at"], float)
 
-#    def fetch_comments(self, post, limit=10):
-#         post.comments.replace_more(limit=0)
-#         comments = []
-#         for comment in post.comments.list()[:limit]:
-#             comments.append({
-#                 "id": comment.id,
-#                 "body": comment.body,
-#                 "score": comment.score,
-#                 "created_at": comment.created_utc
-#             })
-
-#         return comments
-
 
 @patch("praw.Reddit")
 @patch("app.reddit_scraper.load_dotenv")
@@ -106,3 +93,19 @@ def test_fetch_comments(mock_load_dotenv, mock_reddit):
         assert comment["body"] == f"body_{i}"
         assert comment["score"] == f"score_{i}"
         assert isinstance(comment["created_at"], float)
+
+
+@patch("praw.Reddit")
+@patch("app.reddit_scraper.load_dotenv")
+def test_fetch_comments_by_post_id(mock_load_dotenv, mock_reddit):
+    scraper = RedditScraper()
+    mock_post = MagicMock()
+    mock_reddit.return_value.submission.return_value = mock_post
+
+    scraper.fetch_comments = MagicMock()
+    scraper.fetch_comments.return_value = "mocked_comments"
+    result = scraper.fetch_comments_by_post_id("fake_id", limit=5)
+
+    mock_reddit.return_value.submission.assert_called_once_with(id="fake_id")
+    scraper.fetch_comments.assert_called_once_with(mock_post, limit=5)
+    assert result == "mocked_comments"
