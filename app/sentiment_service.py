@@ -1,3 +1,4 @@
+from statistics import mean
 from app.reddit_scraper import RedditScraper
 from app.sentiment_anylyzer import SentimentAnalyzer
 
@@ -12,11 +13,13 @@ class SentimentService:
 
         sentiment_report = {}
         for post in posts:
+            title_score = self.analyzer.analyze(post["title"])
+            body_score = self.analyzer.analyze(post["body"])
+            comment_scores = []
             sentiment_report[post["id"]] = {
                 "title": post["title"],
-                "title_score": self.analyzer.analyze(post["title"]),
-                "body_score": self.analyzer.analyze(post["body"]),
-                "comment_scores": []
+                "title_score": title_score,
+                "body_score": body_score
             }
 
             comments = self.scraper.fetch_comments_by_post_id(
@@ -24,7 +27,9 @@ class SentimentService:
 
             for comment in comments:
                 comment_score = self.analyzer.analyze(comment["body"])
-                sentiment_report[post["id"]]["comment_scores"].append(
-                    (comment["body"], comment_score))
+                comment_scores.append(comment_score)
+
+            sentiment_report[post["id"]]["comments_score"] = mean(
+                comment_scores)
 
         return sentiment_report
