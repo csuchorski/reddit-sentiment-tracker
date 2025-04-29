@@ -1,29 +1,15 @@
-import { useState } from "react";
-import SubredditForm from "./components/SubredditForm";
-import "./App.css";
-import PostList from "./components/PostList";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Report from "./pages/Report";
 
 function App() {
-  const [subredditData, setSubredditData] = useState(null);
-
-  const analyzeSubreddit = async (subreddit, postLimit, commentLimit) => {
-    try {
-      const response = await fetch(
-        `http://localhost:8000/analyze?subreddit=${subreddit}&posts=${postLimit}&comments=${commentLimit}`
-      );
-      const data = await response.json();
-      setSubredditData(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   return (
-    <div>
-      <h1>Subreddit Sentiment Analyzer</h1>
-      <SubredditForm onSubmit={analyzeSubreddit} />
-      {subredditData && <PostList postData={subredditData} />}
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/report/:subreddit" element={<Report />} />
+      </Routes>
+    </Router>
   );
 }
 
