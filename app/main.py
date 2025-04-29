@@ -1,9 +1,21 @@
+from fastapi.staticfiles import StaticFiles
 from fastapi import FastAPI, Query
+from fastapi.middleware.cors import CORSMiddleware
+
 from app.reddit_scraper import RedditScraper
 from app.sentiment_anylyzer import SentimentAnalyzer
 from app.sentiment_service import SentimentService
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 scraper = RedditScraper()
 analyzer = SentimentAnalyzer()
