@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 function SubredditForm() {
   const [subreddit, setSubreddit] = useState("");
-  const [postLimit, setPostLimit] = useState(10);
-  const [commentLimit, setCommentLimit] = useState(30);
+  const [postLimit, setPostLimit] = useState(4);
+  const [commentLimit, setCommentLimit] = useState(10);
   const navigate = useNavigate();
 
   const fetchData = async () => {
