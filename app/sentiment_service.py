@@ -13,8 +13,7 @@ class SentimentService:
 
         sentiment_report = {}
         for post in posts:
-            title_score = self.analyzer.analyze(post["title"])
-            body_score = self.analyzer.analyze(post["body"])
+
             comment_scores = []
             sentiment_report[post["id"]] = {
                 "title": post["title"],
@@ -33,3 +32,23 @@ class SentimentService:
                 comment_scores)
 
         return sentiment_report
+
+    def _generate_summary(self, posts: list) -> dict:
+        ...
+
+    def _analyze_post(self, post: dict, comments: list) -> dict:
+        title_score = self.analyzer.analyze(post["title"])
+        body_score = self.analyzer.analyze(post["body"])
+
+        comment_scores = [self.analyzer.analyze(
+            comment) for comment in comments]
+
+        mean_comment_score = mean(comment_scores) if len(
+            comment_scores) > 0 else None
+
+        return {
+            "title": post["title"],
+            "title_score": title_score,
+            "body_score": body_score,
+            "mean_comment_score": mean_comment_score
+        }
