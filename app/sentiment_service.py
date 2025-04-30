@@ -46,7 +46,7 @@ class SentimentService:
         body_score = self.analyzer.analyze(post["body"])
 
         comment_scores = [self.analyzer.analyze(
-            comment) for comment in comments]
+            comment["body"]) for comment in comments]
 
         mean_comment_score = mean(comment_scores) if len(
             comment_scores) else None
