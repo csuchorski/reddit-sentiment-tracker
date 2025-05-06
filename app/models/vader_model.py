@@ -1,7 +1,8 @@
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+from app.models.base_model import SentimentAnalyzerModel
 
 
-class SentimentAnalyzer:
+class VaderModel(SentimentAnalyzerModel):
     def __init__(self):
         self.analyzer = SentimentIntensityAnalyzer()
 
@@ -10,10 +11,10 @@ class SentimentAnalyzer:
 
         return score_dict["compound"]
 
-    def get_label(self, compound_score):
-        if compound_score >= 0.05:
+    def get_label(self, score):
+        if score >= 0.05:
             return "positive"
-        elif compound_score <= -0.05:
+        elif score <= -0.05:
             return "negative"
         else:
             return "neutral"
