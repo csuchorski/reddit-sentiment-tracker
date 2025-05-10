@@ -1,6 +1,6 @@
 from statistics import mean
 from app.reddit_scraper import RedditScraper
-from app.sentiment_anylyzer import SentimentAnalyzer
+from app.sentiment_analyzer import SentimentAnalyzer
 
 
 class SentimentService:
