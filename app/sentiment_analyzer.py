@@ -2,7 +2,7 @@ from app.factory.model_factory import ModelFactory
 
 
 class SentimentAnalyzer:
-    def __init__(self, model_type="vader"):
+    def __init__(self, model_type="roberta"):
         self.model_type = None
         self.model = None
         self.set_model(model_type)

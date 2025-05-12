@@ -5,11 +5,12 @@ function SubredditForm() {
   const [subreddit, setSubreddit] = useState("");
   const [postLimit, setPostLimit] = useState(4);
   const [commentLimit, setCommentLimit] = useState(10);
+  const [model, setModel] = useState("roberta");
   const navigate = useNavigate();
 
   const fetchData = async () => {
     const response = await fetch(
-      `http://localhost:8000/analyze?subreddit=${subreddit}&posts=${postLimit}&comments=${commentLimit}`
+      `http://localhost:8000/analyze?subreddit=${subreddit}&posts=${postLimit}&comments=${commentLimit}&model=${model}`
     );
 
     if (!response.ok) {
@@ -71,6 +72,39 @@ function SubredditForm() {
           value={commentLimit}
           onChange={(e) => setCommentLimit(e.target.value)}
         />
+      </div>
+
+      <div className="field">
+        <fieldset>
+          <legend>Select model used for analysis</legend>
+          <label>
+            <input
+              type="radio"
+              value="vader"
+              checked={model === "vader"}
+              onChange={() => setModel("vader")}
+            />
+            VADER
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="TextBlob"
+              checked={model === "TextBlob"}
+              onChange={() => setModel("TextBlob")}
+            />
+            TextBlob
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="roberta"
+              checked={model === "roberta"}
+              onChange={() => setModel("roberta")}
+            />
+            RoBERTa
+          </label>
+        </fieldset>
       </div>
 
       <button type="submit">Analyze</button>
