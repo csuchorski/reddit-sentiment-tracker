@@ -8,6 +8,7 @@ function SubredditForm() {
   const [postLimit, setPostLimit] = useState(4);
   const [commentLimit, setCommentLimit] = useState(10);
   const [model, setModel] = useState("roberta");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const fetchData = async () => {
@@ -24,9 +25,11 @@ function SubredditForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setIsLoading(true);
     try {
       const data = await fetchData();
+      setIsLoading(false);
+
       navigate(`/report/${subreddit}`, { state: data });
     } catch (error) {
       console.error(error);
@@ -109,7 +112,12 @@ function SubredditForm() {
         </fieldset>
       </div>
 
-      <button type="submit">Analyze</button>
+      <button type="submit" className="submit-btn" disabled={isLoading}>
+        <span className={`submit-text ${isLoading ? "hidden" : ""}`}>
+          Submit
+        </span>
+        {isLoading && <span className="submit-spinner"></span>}
+      </button>
     </form>
   );
 }
