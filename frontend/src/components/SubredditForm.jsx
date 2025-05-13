@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import "../styles/SubredditForm.css";
+
 function SubredditForm() {
   const [subreddit, setSubreddit] = useState("");
   const [postLimit, setPostLimit] = useState(4);
