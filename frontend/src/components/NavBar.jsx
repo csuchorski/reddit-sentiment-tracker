@@ -20,7 +20,7 @@ function NavBar() {
           rel="noopener noreferrer"
           title="View on GitHub"
         >
-          GitHub
+          <img src="../../public/github-mark.svg" alt="GitHub" />
         </a>
       </div>
     </nav>

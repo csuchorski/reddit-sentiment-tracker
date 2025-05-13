@@ -77,7 +77,7 @@ function SubredditForm() {
       </div>
 
       <div className="field">
-        <fieldset>
+        <fieldset className="model-input">
           <legend>Select model used for analysis</legend>
           <label>
             <input
