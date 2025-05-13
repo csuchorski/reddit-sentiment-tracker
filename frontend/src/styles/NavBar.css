@@ -1,0 +1,73 @@
+
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background: var(--timberwolf);
+  color: black;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(43, 45, 66, 0.15);
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+}
+
+.navbar a {
+  color: black;
+  text-decoration: none;
+  margin-right: 1.5rem;
+  font-size: 1.1rem;
+  transition: color 0.2s, background 0.2s;
+  padding: 0.2em 0.5em;
+  border-radius: 4px;
+}
+
+.navbar a:last-child {
+  margin-right: 0;
+}
+
+.navbar a:hover,
+.navbar a.active {
+  color: var(--space-cadet);
+  background: var(--red-pantone);
+  text-decoration: underline;
+}
+
+.navbar-github a {
+  font-weight: bold;
+  border: 1px solid var(--red-pantone);
+  border-radius: 4px;
+  padding: 0.4em 0.9em;
+  background: var(--fire-engine-red);
+  color: var(--antiflash-white);
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.navbar-github a:hover {
+  background: var(--red-pantone);
+  color: var(--space-cadet);
+  border-color: var(--antiflash-white);
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+  }
+  .navbar-links {
+    flex-direction: column;
+    width: 100%;
+  }
+  .navbar a {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+  }
+  .navbar-github {
+    margin-top: 1rem;
+  }
+}
