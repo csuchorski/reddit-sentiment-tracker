@@ -1,12 +1,17 @@
 :root {
---alabaster: #e0e2dbff;
---timberwolf: #d2d4c8ff;
---ash-gray: #b8bdb5ff;
---cadet-gray: #889696ff;
---hookers-green: #5f7470ff;
+  --alabaster: #e0e2dbff;
+  --timberwolf: #d2d4c8ff;
+  --ash-gray: #b8bdb5ff;
+  --cadet-gray: #889696ff;
+  --hookers-green: #5f7470ff;
 }
 
-body{
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
   background-color: var(--alabaster);
 }
-

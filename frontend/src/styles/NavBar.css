@@ -5,7 +5,7 @@
   padding: 1rem 2rem;
   background: var(--timberwolf);
   color: black;
-  
+
   box-shadow: 0 2px 4px rgba(43, 45, 66, 0.15);
 }
 
@@ -17,10 +17,8 @@
 .navbar a {
   color: black;
   text-decoration: none;
-  margin-right: 1.5rem;
   font-size: 1.1rem;
   transition: color 0.2s, background 0.2s;
-  padding: 0.2em 0.5em;
   border-radius: 4px;
 }
 
@@ -33,7 +31,7 @@
   text-decoration: underline;
 }
 
-.navbar-github a>img{
+.navbar-github a > img {
   height: 2.5rem;
   width: auto;
 }
@@ -42,5 +40,4 @@
   .navbar {
     padding: 0.5rem 1rem;
   }
-
 }

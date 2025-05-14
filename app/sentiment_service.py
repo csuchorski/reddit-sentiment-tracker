@@ -49,7 +49,7 @@ class SentimentService:
             comment["body"]) for comment in comments]
 
         mean_comment_score = mean(comment_scores) if len(
-            comment_scores) else None
+            comment_scores) else 0.0
 
         return {
             "title": post["title"],
