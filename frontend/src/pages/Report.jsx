@@ -17,6 +17,9 @@ function Report() {
       <div className="subreddit-summary">
         {summary && (
           <Summary
+            titleLabel={summary.title_label}
+            bodyLabel={summary.body_label}
+            commentLabel={summary.comment_label}
             meanTitleScore={summary.mean_title_score}
             meanBodyScore={summary.mean_body_score}
             meanCommentScore={summary.mean_comment_score}
