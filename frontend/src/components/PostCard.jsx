@@ -1,8 +1,14 @@
 import "../styles/PostCard.css";
 
+function getColorClass(score) {
+  if (score > 0.05) return "score-positive";
+  if (score < -0.05) return "score-negative";
+  return "score-neutral";
+}
+
 function PostCard({ id, title, titleScore, bodyScore, commentScore }) {
   return (
-    <div className="post-card">
+    <div className={`post-card ${getColorClass(commentScore)}`}>
       <h3 className="post-title">{title}</h3>
       <p>{id}</p>
       <div className="scores-container">
