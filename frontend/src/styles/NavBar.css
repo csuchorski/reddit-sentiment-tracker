@@ -1,0 +1,43 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background: var(--timberwolf);
+  color: black;
+
+  box-shadow: 0 2px 4px rgba(43, 45, 66, 0.15);
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+}
+
+.navbar a {
+  color: black;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.2s, background 0.2s;
+  border-radius: 4px;
+}
+
+.navbar a:last-child {
+  margin-right: 0;
+}
+
+.navbar a:hover,
+.navbar a.active {
+  text-decoration: underline;
+}
+
+.navbar-github a > img {
+  height: 2.5rem;
+  width: auto;
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    padding: 0.5rem 1rem;
+  }
+}

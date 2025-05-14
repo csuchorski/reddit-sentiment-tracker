@@ -1,15 +1,19 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import "../styles/SubredditForm.css";
+
 function SubredditForm() {
   const [subreddit, setSubreddit] = useState("");
   const [postLimit, setPostLimit] = useState(4);
   const [commentLimit, setCommentLimit] = useState(10);
+  const [model, setModel] = useState("roberta");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const fetchData = async () => {
     const response = await fetch(
-      `http://localhost:8000/analyze?subreddit=${subreddit}&posts=${postLimit}&comments=${commentLimit}`
+      `http://localhost:8000/analyze?subreddit=${subreddit}&posts=${postLimit}&comments=${commentLimit}&model=${model}`
     );
 
     if (!response.ok) {
@@ -21,9 +25,11 @@ function SubredditForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setIsLoading(true);
     try {
       const data = await fetchData();
+      setIsLoading(false);
+
       navigate(`/report/${subreddit}`, { state: data });
     } catch (error) {
       console.error(error);
@@ -73,7 +79,45 @@ function SubredditForm() {
         />
       </div>
 
-      <button type="submit">Analyze</button>
+      <div className="field">
+        <fieldset className="model-input">
+          <legend>Select model used for analysis</legend>
+          <label>
+            <input
+              type="radio"
+              value="vader"
+              checked={model === "vader"}
+              onChange={() => setModel("vader")}
+            />
+            VADER
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="TextBlob"
+              checked={model === "TextBlob"}
+              onChange={() => setModel("TextBlob")}
+            />
+            TextBlob
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="roberta"
+              checked={model === "roberta"}
+              onChange={() => setModel("roberta")}
+            />
+            RoBERTa
+          </label>
+        </fieldset>
+      </div>
+
+      <button type="submit" className="submit-btn" disabled={isLoading}>
+        <span className={`submit-text ${isLoading ? "hidden" : ""}`}>
+          Submit
+        </span>
+        {isLoading && <span className="submit-spinner"></span>}
+      </button>
     </form>
   );
 }
