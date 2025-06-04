@@ -36,6 +36,9 @@ class SentimentService:
         mean_comment_score = mean(comment_scores) if len(
             comment_scores) else None
         return {
+            "title_label": self.analyzer.get_label(mean_title_score),
+            "body_label": self.analyzer.get_label(mean_body_score),
+            "comment_label": self.analyzer.get_label(mean_comment_score),
             "mean_title_score": mean_title_score,
             "mean_body_score": mean_body_score,
             "mean_comment_score": mean_comment_score

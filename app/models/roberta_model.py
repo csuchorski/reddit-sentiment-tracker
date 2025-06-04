@@ -6,7 +6,10 @@ from app.models.base_model import SentimentAnalyzerModel
 class RobertaModel(SentimentAnalyzerModel):
     def __init__(self):
         self.classifier = pipeline(task="sentiment-analysis",
-                                   model="cardiffnlp/twitter-roberta-base-sentiment-latest")
+                                   model="cardiffnlp/twitter-roberta-base-sentiment-latest",
+                                   tokenizer="cardiffnlp/twitter-roberta-base-sentiment-latest",
+                                   truncation=True,
+                                   max_length=512)
 
     def analyze(self, text: str):
         score_dict = self.classifier(text)[0]

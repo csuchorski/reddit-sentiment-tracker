@@ -19,3 +19,13 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+.score-positive {
+  background-color: #43a047;
+}
+.score-neutral {
+  background-color: var(--timberwolf);
+}
+.score-negative {
+  background-color: #cf211e91;
+}
