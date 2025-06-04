@@ -24,7 +24,7 @@
   background-color: #43a047;
 }
 .score-neutral {
-  background-color: #1976d2;
+  background-color: var(--timberwolf);
 }
 .score-negative {
   background-color: #cf211e91;
